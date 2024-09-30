@@ -57,7 +57,7 @@ const Home: FC = () => {
             setInputText("");
 
             try {
-                const response = await fetch('http://127.0.0.1:5000/chat_gen', {
+                const response = await fetch('http://127.0.0.1:8000/chat_gen', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -117,6 +117,11 @@ const Home: FC = () => {
                             type="text"
                             value={inputText}
                             onChange={(e) => setInputText(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    handleSendMessage();
+                                }
+                            }}
                             className="flex-grow p-3 border rounded bg-black text-green-300 placeholder-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 glow-input"
                             placeholder="Type your message..."
                             style={{
